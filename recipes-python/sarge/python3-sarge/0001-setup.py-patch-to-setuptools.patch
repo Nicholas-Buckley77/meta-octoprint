@@ -1,0 +1,25 @@
+From 70a7ff63c7f139384b1c9783fe622b661769647b Mon Sep 17 00:00:00 2001
+From: Josef Holzmayr <jester@theyoctojester.info>
+Date: Wed, 24 Aug 2022 15:07:56 +0200
+Subject: [PATCH] setup.py: patch to setuptools
+
+distutils is deprecated and not building on kirkstone anymore
+
+Signed-off-by: Josef Holzmayr <jester@theyoctojester.info>
+---
+ setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/setup.py b/setup.py
+index 6f86648..6f340b5 100644
+--- a/setup.py
++++ b/setup.py
+@@ -4,7 +4,7 @@
+ #
+ # sarge: Subprocess Allegedly Rewards Good Encapsulation :-)
+ #
+-from distutils.core import setup, Command
++from setuptools import setup, Command
+ import os
+ from os.path import join, dirname, abspath
+ import re
