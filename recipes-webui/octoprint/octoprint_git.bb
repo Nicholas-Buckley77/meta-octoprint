@@ -6,7 +6,7 @@ SECTION = "devel/python"
 LICENSE = "AGPL-3.0"
 LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=73f1eb20517c55bf9493b7dd6e480788"
 
-TAG = "1.7.2"
+TAG = "1.9.3"
 
 SRCREV = "${TAG}"
 PV = "${TAG}+git${SRCPV}"
@@ -68,53 +68,80 @@ pkg_postinst:${PN}:append () {
 }
 
 PYTHON_DEPS = " \
+    python3-argon2-cffi \
+    python3-argon2-cffi-bindings \
+    python3-async-timeout \
+    python3-babel \
     python3-blinker \
     python3-cachelib \
+    python3-certifi \
+    python3-cffi \
+    python3-charset-normalizer \
+    python3-class-doc \
     python3-click \
-    python3-dateutil \
+    python3-colorlog \
+    python3-deprecated \
     python3-emoji \
     python3-feedparser \
     python3-filetype \
     python3-flask \
     python3-flask-assets \
+    python3-flask-limiter \
     python3-flask-babel \
     python3-flask-login \
-    python3-flask-principal \
     python3-frozendict \
     python3-future \
-    python3-html \
-    python3-itsdangerous \
+    python3-idna \
+    python3-ifaddr \
+    python3-importlib-metadata \
+    python3-importlib-resources\
     python3-itsdangerous \
     python3-jinja2 \
-    python3-json \
+    python3-limits \
     python3-markdown \
+    python3-markdown-it-py \
     python3-markupsafe \
-    python3-monotonic \
+    python3-mdurl \
+    python3-more-itertools \
     python3-netaddr \
     python3-netifaces \
     python3-netserver \
     python3-numpy \
     python3-octoprint-filecheck \
     python3-octoprint-firmwarecheck \
+    python3-octoprint-pisupport \
+    python3-ordered-set \
     python3-pip \
+    python3-packaging \
+    python3-passlib \
+    python3-pathvalidate \
     python3-pkginfo \
     python3-psutil \
+    python3-pycparser \
+    python3-pydantic \
+    python3-pygments \
     python3-pylru \
     python3-pyserial \
+    python3-pytz \
     python3-pyyaml \
     python3-regex \
     python3-requests \
-    python3-rsa \
+    python3-rich \
     python3-sarge \
     python3-semantic-version \
     python3-sentry-sdk \
+    python3-sgmllib3k \
     python3-tornado \
+    python3-typing-extensions \
     python3-unidecode \
+    python3-urllib3 \
     python3-watchdog \
     python3-websocket-client \
     python3-werkzeug \
     python3-wrapt \
     python3-zeroconf \
+    python3-zipp \
+    python3-zipstream-ng \
 "
 
 DEPENDS += " \

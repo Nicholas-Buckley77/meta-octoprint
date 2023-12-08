@@ -1,0 +1,91 @@
+From c2ec886cc8677e13af81e35090371ed94536b46d Mon Sep 17 00:00:00 2001
+From: Nicholas-Buckley77 <nibu7565@colorado.edu>
+Date: Fri, 8 Dec 2023 00:14:58 -0700
+Subject: [PATCH] Ensure1 it compiles for non x86!!!!!!!!!!
+
+---
+ src/_argon2_cffi_bindings/_ffi_build.py       |  4 ++--
+ src/argon2_cffi_bindings.egg-info/PKG-INFO    | 13 ++++++++-----
+ src/argon2_cffi_bindings.egg-info/SOURCES.txt |  2 ++
+ 3 files changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/src/_argon2_cffi_bindings/_ffi_build.py b/src/_argon2_cffi_bindings/_ffi_build.py
+index 0d4d0be..d1ad67f 100644
+--- a/src/_argon2_cffi_bindings/_ffi_build.py
++++ b/src/_argon2_cffi_bindings/_ffi_build.py
+@@ -30,7 +30,7 @@ target_platform = _get_target_platform(
+     os.environ.get("ARCHFLAGS", ""), platform.machine()
+ )
+ 
+-
++use_sse2 = "0"
+ if use_sse2 == "1":
+     optimized = True
+ elif use_sse2 == "0":
+@@ -54,7 +54,7 @@ else:
+     ffi.set_source(
+         "_ffi",
+         "#include <argon2.h>",
+-        extra_compile_args=["-msse2"] if (optimized and not windows) else None,
++        extra_compile_args=None,
+         include_dirs=[os.path.join("extras", "libargon2", "include")],
+         sources=[
+             str(lib_base / path)
+diff --git a/src/argon2_cffi_bindings.egg-info/PKG-INFO b/src/argon2_cffi_bindings.egg-info/PKG-INFO
+index 23a5116..20e170b 100644
+--- a/src/argon2_cffi_bindings.egg-info/PKG-INFO
++++ b/src/argon2_cffi_bindings.egg-info/PKG-INFO
+@@ -1,6 +1,6 @@
+ Metadata-Version: 2.1
+ Name: argon2-cffi-bindings
+-Version: 21.2.0
++Version: 0.0.post1.dev1+g369bb2d.d20231208
+ Summary: Low-level CFFI bindings for Argon2
+ Home-page: https://github.com/hynek/argon2-cffi-bindings
+ Author: Hynek Schlawack
+@@ -13,7 +13,6 @@ Project-URL: Funding, https://github.com/sponsors/hynek
+ Project-URL: Tidelift, https://tidelift.com/subscription/pkg/pypi-argon2-cffi?utm_source=pypi-argon2-cffi&utm_medium=pypi
+ Project-URL: Ko-fi, https://ko-fi.com/the_hynek
+ Keywords: password,hash,hashing,security,bindings,cffi
+-Platform: UNKNOWN
+ Classifier: Development Status :: 5 - Production/Stable
+ Classifier: Intended Audience :: Developers
+ Classifier: License :: OSI Approved :: MIT License
+@@ -36,9 +35,15 @@ Classifier: Topic :: Security
+ Classifier: Topic :: Software Development :: Libraries :: Python Modules
+ Requires-Python: >=3.6
+ Description-Content-Type: text/markdown
++License-File: LICENSE
++Requires-Dist: cffi>=1.0.1
+ Provides-Extra: tests
++Requires-Dist: pytest; extra == "tests"
+ Provides-Extra: dev
+-License-File: LICENSE
++Requires-Dist: pytest; extra == "dev"
++Requires-Dist: cogapp; extra == "dev"
++Requires-Dist: pre-commit; extra == "dev"
++Requires-Dist: wheel; extra == "dev"
+ 
+ # Low-level Python CFFI Bindings for Argon2
+ 
+@@ -142,5 +147,3 @@ The string encoding routines in src/encoding.c are copyright (c) 2015 Thomas Por
+ The [*BLAKE2*](https://www.blake2.net) code in ``src/blake2/`` is copyright (c) Samuel Neves, 2013-2015, and under [CC0] license.
+ 
+ [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
+-
+-
+diff --git a/src/argon2_cffi_bindings.egg-info/SOURCES.txt b/src/argon2_cffi_bindings.egg-info/SOURCES.txt
+index 8ff672b..113df2b 100644
+--- a/src/argon2_cffi_bindings.egg-info/SOURCES.txt
++++ b/src/argon2_cffi_bindings.egg-info/SOURCES.txt
+@@ -4,8 +4,10 @@
+ CHANGELOG.md
+ LICENSE
+ MANIFEST.in
++PKG-INFO
+ README.md
+ pyproject.toml
++setup.cfg
+ setup.py
+ tox.ini
+ .github/CODE_OF_CONDUCT.md
