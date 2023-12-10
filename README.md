@@ -21,7 +21,15 @@ recipes for use with OpenEmbedded and/or Yocto.
 
 Layer is based on old meta-maker layer
 
-Original autors behind meta-maker:
+Original authors behind meta-maker:
 * Denys "denix" Dmytriyenko <denis@denix.org>
 * Tim "moto-timo" Orling <TicoTimo@gmail.com>
 * Koen Kooi <koen@dominion.thruhere.net>
+
+
+## Layer updates
+
+This layer has been updated to use be compatible with the nanbield yocto version and provide a version of python known working with octoprint 1.9.3
+
+Author
+* Nicholas Buckley <nbuckleyce@gmail.com>

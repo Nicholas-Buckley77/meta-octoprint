@@ -30,27 +30,35 @@ do_patch() {
 }
 
 do_install:append() {
+
+    # ensure octoprint and it's config are correctly seen
     sed -i -e s:/etc:${sysconfdir}:g ${WORKDIR}/octoprint.service
     sed -i -e s:/etc:${sysconfdir}:g ${WORKDIR}/config.yaml
     sed -i -e 's: /sbin: ${base_sbindir}:g' ${WORKDIR}/octoprint
     sed -i -e 's: /bin: ${base_bindir}:g' ${WORKDIR}/octoprint
     sed -i -e s:/usr/bin:${bindir}:g ${WORKDIR}/octoprint
 
+    # install the conffg file
     install -d ${D}${sysconfdir}/octoprint
     install -m 0644 ${WORKDIR}/config.yaml ${D}${sysconfdir}/octoprint/config.yaml
     chmod a+rw ${D}${sysconfdir}/octoprint/config.yaml
 
-    install -d ${D}/lib/systemd/system
+    #install the systemd service to run octoprint on startup
+    install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/octoprint.service ${D}${systemd_unitdir}/system
 
+    #install the library for octoprint in the correct location
     install -d ${D}${localstatedir}/lib/octoprint
     chmod a+rw ${D}${localstatedir}/lib/octoprint
 
+    #put octoprint into the sudoers file
     install -d -m 0750 ${D}${sysconfdir}/sudoers.d
     install -m 0644 ${WORKDIR}/octoprint ${D}${sysconfdir}/sudoers.d/
 
+    #install command script that calls sudoed pip to install plugins
     install -d ${D}${bindir}
     install -m 0755 ${WORKDIR}/pip-sudo ${D}${bindir}
+
 }
 
 USERADD_PACKAGES = "${PN}"
