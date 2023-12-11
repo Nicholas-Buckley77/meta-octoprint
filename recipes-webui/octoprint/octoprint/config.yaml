@@ -27,10 +27,8 @@ plugins:
     debug_logging: false
     default_profile: null
   pluginmanager:
-    pip: /usr/bin/pip-sudo
     pip_force_user: true
   softwareupdate:
-    pip_command: /usr/bin/pip-sudo
     _config_version: 6
     checks:
       octoprint:
@@ -39,17 +37,17 @@ plugins:
         prerelease_channel: null
     notify_users: false
 webcam:
-  bitrate: 15000k
+  bitrate: 18432k
   ffmpeg: /usr/bin/ffmpeg
   ffmpegThreads: 0
   snapshot: http://localhost:8080/?action=snapshot
   stream: /webcam/?action=stream
   timelapse:
-    fps: 25
+    fps: 15
     options:
       capturePostRoll: false
       interval: 20
-    postRoll: 1
+    postRoll: 0
     type: timed
 server:
   onlineCheck:
@@ -57,8 +55,8 @@ server:
   pluginBlacklist:
     enabled: true
   commands:
-    serverRestartCommand: sudo systemctl restart octoprint
-    systemRestartCommand: sudo shutdown -r now
-    systemShutdownCommand: sudo shutdown -h now
+    serverRestartCommand: systemctl restart octoprint
+    systemRestartCommand: shutdown -r now
+    systemShutdownCommand: shutdown -h now
 system:
   actions: []
